@@ -70,10 +70,10 @@ if (!devMode) {
     prod.plugins.push(
         new webpack.BannerPlugin({
             banner:
-                'Lightbox for Bootstrap by @ashleydw\n' +
-                'https://github.com/ashleydw/lightbox\n' +
+                'Lightbox for Bootstrap by @jcputney\n' +
+                'https://github.com/jcputney/lightbox\n' +
                 '\n' +
-                'License: https://github.com/ashleydw/lightbox/blob/master/LICENSE\n',
+                'License: https://github.com/jcputney/lightbox/blob/master/LICENSE\n',
             entryOnly: true,
             include: 'ekko-lightbox.js'
         })

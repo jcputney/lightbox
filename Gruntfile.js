@@ -2,23 +2,23 @@ module.exports = function (grunt) {
     "use strict";
 
     grunt.initConfig({
-        banner:
-            '/*!\n' +
-            ' * Lightbox for Bootstrap by @ashleydw\n' +
-            ' * https://github.com/ashleydw/lightbox\n' +
-            ' *\n' +
-            ' * License: https://github.com/ashleydw/lightbox/blob/master/LICENSE\n' +
-            ' */',
+		banner:
+			'/*!\n' +
+			' * Lightbox for Bootstrap by @jcputney\n' +
+			' * https://github.com/jcputney/lightbox\n' +
+			' *\n' +
+			' * License: https://github.com/jcputney/lightbox/blob/master/LICENSE\n' +
+			' */',
 
-	    less: {
-		    dist: {
-			    files: {
-				    'dist/ekko-lightbox.css': 'ekko-lightbox.less'
-			    }
-		    }
-	    },
-	    babel: {
-		    options: {
+		less: {
+			dist: {
+				files: {
+					'dist/ekko-lightbox.css': 'ekko-lightbox.less'
+				}
+			}
+		},
+		babel: {
+			options: {
 			    sourceMap: true,
 			    modules: 'ignore'
 		    },

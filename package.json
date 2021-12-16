@@ -9,22 +9,22 @@
     "jquery",
     "modal"
   ],
-  "homepage": "https://github.com/ashleydw/lightbox",
-  "author": "ashleydw <hello@ashleyd.ws>",
+  "homepage": "https://github.com/jcputney/lightbox",
+  "author": "jcputney <jputney@noverant.com>",
   "main": "dist/ekko-lightbox.min.js",
   "style": "dist/ekko-lightbox.css",
   "less": "ekko-lightbox.less",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashleydw/lightbox.git"
+    "url": "https://github.com/jcputney/lightbox.git"
   },
   "bugs": {
-    "url": "https://github.com/ashleydw/lightbox/issues"
+    "url": "https://github.com/jcputney/lightbox/issues"
   },
   "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js -p",
-    "start": "NODE_ENV=development webpack-serve --open --no-clipboard --content ./ --config webpack.config.js --hot --colors --inline"
+    "start": "NODE_ENV=development webpack-serve --port 8082 --open --no-clipboard --content ./ --config webpack.config.js --hot --colors --inline"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

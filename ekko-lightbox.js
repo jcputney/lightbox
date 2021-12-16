@@ -81,7 +81,7 @@ const Lightbox = (($) => {
 			this._isBootstrap3 = $.fn.modal.Constructor.VERSION[0] == 3;
 
 			let h4 = `<h4 class="modal-title">${this._config.title || "&nbsp;"}</h4>`;
-			let btn = `<button type="button" class="close" data-dismiss="modal" aria-label="${this._config.strings.close}"><span aria-hidden="true">&times;</span></button>`;
+			let btn = `<button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="${this._config.strings.close}"></button>`;
 
 			let header = `<div class="modal-header${this._config.title || this._config.alwaysShowClose ? '' : ' hide'}">`+(this._isBootstrap3 ? btn+h4 : h4+btn)+`</div>`;
 			let footer = `<div class="modal-footer${this._config.footer ? '' : ' hide'}">${this._config.footer || "&nbsp;"}</div>`;
@@ -126,22 +126,23 @@ const Lightbox = (($) => {
 			}
 
 			this._$modal
-			.on('show.bs.modal', this._config.onShow.bind(this))
-			.on('shown.bs.modal', () => {
-				this._toggleLoading(true)
-				this._handle()
-				return this._config.onShown.call(this)
-			})
-			.on('hide.bs.modal', this._config.onHide.bind(this))
-			.on('hidden.bs.modal', () => {
-				if (this._galleryName) {
-					$(document).off('keydown.ekkoLightbox')
-					$(window).off('resize.ekkoLightbox')
-				}
-				this._$modal.remove()
-				return this._config.onHidden.call(this)
-			})
-			.modal(this._config)
+				.on('show.bs.modal', this._config.onShow.bind(this))
+				.on('shown.bs.modal', () => {
+					this._toggleLoading(true)
+					this._handle()
+					return this._config.onShown.call(this)
+				})
+				.on('hide.bs.modal', this._config.onHide.bind(this))
+				.on('hidden.bs.modal', () => {
+					if (this._galleryName) {
+						$(document).off('keydown.ekkoLightbox')
+						$(window).off('resize.ekkoLightbox')
+					}
+					this._$modal.remove()
+					return this._config.onHidden.call(this)
+				})
+				.modal(this._config)
+				.modal('show')
 
 			$(window).on('resize.ekkoLightbox', () => {
 				this._resize(this._wantedWidth, this._wantedHeight)
@@ -257,13 +258,13 @@ const Lightbox = (($) => {
 				type = 'image';
 			if(!type && this._getYoutubeId(src))
 				type = 'youtube';
-			if(!type && this._getVimeoId(src))
+			if (!type && this._getVimeoId(src))
 				type = 'vimeo';
-			if(!type && this._getInstagramId(src))
+			if (!type && this._getInstagramId(src))
 				type = 'instagram';
-			if(type == 'audio' || type == 'video' || (!type && this._isMedia(src)))
+			if (type === 'audio' || type === 'video' || (!type && this._isMedia(src)))
 				type = 'media';
-			if(!type || ['image', 'youtube', 'vimeo', 'instagram', 'media', 'url'].indexOf(type) < 0)
+			if (!type || ['image', 'youtube', 'vimeo', 'instagram', 'media', 'url'].indexOf(type) < 0)
 				type = 'url';
 
 			return type;
@@ -275,16 +276,15 @@ const Lightbox = (($) => {
 				url: src,
 				async: false
 			});
-			let contentType = response.getResponseHeader('Content-Type')
-			return contentType;
+			return response.getResponseHeader('Content-Type');
 		}
 
 		_isImage(string) {
-			return string && string.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i)
+			return string && string.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)(([?#]).*)?$)/i)
 		}
 
 		_isMedia(string) {
-			return string && string.match(/(\.(mp3|mp4|ogg|webm|wav)((\?|#).*)?$)/i)
+			return string && string.match(/(\.(mp3|mp4|ogg|webm|wav)(([?#]).*)?$)/i)
 		}
 
 		_containerToUse() {
@@ -348,7 +348,7 @@ const Lightbox = (($) => {
 		_getYoutubeId(string) {
 			if(!string)
 				return false;
-			let matches = string.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/)
+			let matches = string.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/)
 			return (matches && matches[2].length === 11) ? matches[2] : false
 		}
 
@@ -458,7 +458,7 @@ const Lightbox = (($) => {
 
 		_showVideoIframe(url, width, height, $containerForElement) { // should be used for videos only. for remote content use loadRemoteContent (data-type=url)
 			height = height || width; // default to square
-			$containerForElement.html(`<div class="embed-responsive embed-responsive-16by9"><iframe width="${width}" height="${height}" src="${url}" frameborder="0" allowfullscreen class="embed-responsive-item"></iframe></div>`);
+			$containerForElement.html(`<div class="ratio ratio-16x9"><iframe width="${width}" height="${height}" src="${url}" frameborder="0" allowfullscreen class="ratio-item"></iframe></div>`);
 			this._resize(width, height);
 			this._config.onContentLoaded.call(this);
 			if (this._$modalArrows)
@@ -466,7 +466,7 @@ const Lightbox = (($) => {
 			this._toggleLoading(false);
 			return this;
 		}
-                
+
 		_showHtml5Media(url, $containerForElement) { // should be used for videos only. for remote content use loadRemoteContent (data-type=url)
 			let contentType = this._getRemoteContentType(url);
 			if(!contentType){
@@ -480,7 +480,7 @@ const Lightbox = (($) => {
 			}
 			let width = this._$element.data('width') || 560
 			let height = this._$element.data('height') ||  width / ( 560/315 )
-			$containerForElement.html(`<div class="embed-responsive embed-responsive-16by9"><${mediaType} width="${width}" height="${height}" preload="auto" autoplay controls class="embed-responsive-item"><source src="${url}" type="${contentType}">${this._config.strings.type}</${mediaType}></div>`);
+			$containerForElement.html(`<div class="ratio ratio-16x9"><${mediaType} width="${width}" height="${height}" preload="auto" autoplay controls class="ratio-item"><source src="${url}" type="${contentType}">${this._config.strings.type}</${mediaType}></div>`);
 			this._resize(width, height);
 			this._config.onContentLoaded.call(this);
 			if (this._$modalArrows)
@@ -520,13 +520,12 @@ const Lightbox = (($) => {
 			if (typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol)
 				return true;
 
-			if (typeof match[2] === "string" && match[2].length > 0 && match[2].replace(new RegExp(`:(${{
-					"http:": 80,
-					"https:": 443
-				}[location.protocol]})?$`), "") !== location.host)
-				return true;
+			return typeof match[2] === "string" && match[2].length > 0 && match[2].replace(new RegExp(`:(${{
+				"http:": 80,
+				"https:": 443
+			}[location.protocol]})?$`), "") !== location.host;
 
-			return false;
+
 		}
 
 		_error( message ) {
