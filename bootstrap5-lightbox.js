@@ -1,6 +1,6 @@
 const Lightbox = (($) => {
 
-	const NAME = 'ekkoLightbox'
+	const NAME = 'bootstrap5Lightbox'
 	const JQUERY_NO_CONFLICT = $.fn[NAME]
 
 	const Default = {
@@ -12,7 +12,7 @@ const Lightbox = (($) => {
 		wrapping: true, //if true, gallery loops infinitely
 		type: null, //force the lightbox into image / youtube mode. if null, or not image|youtube|vimeo; detect it
 		alwaysShowClose: false, //always show the close button, even if there is no title
-		loadingMessage: '<div class="ekko-lightbox-loader"><div><div></div><div></div></div></div>', // http://tobiasahlin.com/spinkit/
+		loadingMessage: '<div class="bootstrap5-lightbox-loader"><div><div></div><div></div></div></div>', // http://tobiasahlin.com/spinkit/
 		leftArrow: '<span>&#10094;</span>',
 		rightArrow: '<span>&#10095;</span>',
 		strings: {
@@ -75,7 +75,7 @@ const Lightbox = (($) => {
 			this._touchstartX = 0
 			this._touchendX = 0
 
-			this._modalId = `ekkoLightbox-${Math.floor((Math.random() * 1000) + 1)}`;
+			this._modalId = `bootstrap5Lightbox-${Math.floor((Math.random() * 1000) + 1)}`;
 			this._$element = $element instanceof jQuery ? $element : $($element)
 
 			this._isBootstrap3 = $.fn.modal.Constructor.VERSION[0] == 3;
@@ -85,9 +85,9 @@ const Lightbox = (($) => {
 
 			let header = `<div class="modal-header${this._config.title || this._config.alwaysShowClose ? '' : ' hide'}">`+(this._isBootstrap3 ? btn+h4 : h4+btn)+`</div>`;
 			let footer = `<div class="modal-footer${this._config.footer ? '' : ' hide'}">${this._config.footer || "&nbsp;"}</div>`;
-			let body = '<div class="modal-body"><div class="ekko-lightbox-container"><div class="ekko-lightbox-item fade in show"></div><div class="ekko-lightbox-item fade"></div></div></div>'
+			let body = '<div class="modal-body"><div class="bootstrap5-lightbox-container"><div class="bootstrap5-lightbox-item fade in show"></div><div class="bootstrap5-lightbox-item fade"></div></div></div>'
 			let dialog = `<div class="modal-dialog" role="document"><div class="modal-content">${header}${body}${footer}</div></div>`
-			$(this._config.doc.body).append(`<div id="${this._modalId}" class="ekko-lightbox modal fade" tabindex="-1" tabindex="-1" role="dialog" aria-hidden="true">${dialog}</div>`)
+			$(this._config.doc.body).append(`<div id="${this._modalId}" class="bootstrap5-lightbox modal fade" tabindex="-1" tabindex="-1" role="dialog" aria-hidden="true">${dialog}</div>`)
 
 			this._$modal = $(`#${this._modalId}`, this._config.doc)
 			this._$modalDialog = this._$modal.find('.modal-dialog').first()
@@ -96,7 +96,7 @@ const Lightbox = (($) => {
 			this._$modalHeader = this._$modal.find('.modal-header').first()
 			this._$modalFooter = this._$modal.find('.modal-footer').first()
 
-			this._$lightboxContainer = this._$modalBody.find('.ekko-lightbox-container').first()
+			this._$lightboxContainer = this._$modalBody.find('.bootstrap5-lightbox-container').first()
 			this._$lightboxBodyOne = this._$lightboxContainer.find('> div:first-child').first()
 			this._$lightboxBodyTwo = this._$lightboxContainer.find('> div:last-child').first()
 
@@ -107,12 +107,12 @@ const Lightbox = (($) => {
 			if (this._galleryName) {
 				this._$galleryItems = $(document.body).find(`*[data-gallery="${this._galleryName}"]`)
 				this._galleryIndex = this._$galleryItems.index(this._$element)
-				$(document).on('keydown.ekkoLightbox', this._navigationalBinder.bind(this))
+				$(document).on('keydown.bootstrap5Lightbox', this._navigationalBinder.bind(this))
 
 				// add the directional arrows to the modal
 				if (this._config.showArrows && this._$galleryItems.length > 1) {
-					this._$lightboxContainer.append(`<div class="ekko-lightbox-nav-overlay"><a href="#">${this._config.leftArrow}</a><a href="#">${this._config.rightArrow}</a></div>`)
-					this._$modalArrows = this._$lightboxContainer.find('div.ekko-lightbox-nav-overlay').first()
+					this._$lightboxContainer.append(`<div class="bootstrap5-lightbox-nav-overlay"><a href="#">${this._config.leftArrow}</a><a href="#">${this._config.rightArrow}</a></div>`)
+					this._$modalArrows = this._$lightboxContainer.find('div.bootstrap5-lightbox-nav-overlay').first()
 					this._$lightboxContainer.on('click', 'a:first-child', event => {
 						event.preventDefault()
 						return this.navigateLeft()
@@ -135,8 +135,8 @@ const Lightbox = (($) => {
 				.on('hide.bs.modal', this._config.onHide.bind(this))
 				.on('hidden.bs.modal', () => {
 					if (this._galleryName) {
-						$(document).off('keydown.ekkoLightbox')
-						$(window).off('resize.ekkoLightbox')
+						$(document).off('keydown.bootstrap5Lightbox')
+						$(window).off('resize.bootstrap5Lightbox')
 					}
 					this._$modal.remove()
 					return this._config.onHidden.call(this)
@@ -144,7 +144,7 @@ const Lightbox = (($) => {
 				.modal(this._config)
 				.modal('show')
 
-			$(window).on('resize.ekkoLightbox', () => {
+			$(window).on('resize.bootstrap5Lightbox', () => {
 				this._resize(this._wantedWidth, this._wantedHeight)
 			})
 			this._$lightboxContainer
@@ -223,7 +223,7 @@ const Lightbox = (($) => {
 
 		updateNavigation() {
 			if (!this._config.wrapping) {
-				let $nav = this._$lightboxContainer.find('div.ekko-lightbox-nav-overlay')
+				let $nav = this._$lightboxContainer.find('div.bootstrap5-lightbox-nav-overlay')
 				if (this._galleryIndex === 0)
 					$nav.find('a:first-child').addClass('disabled')
 				else
@@ -371,7 +371,7 @@ const Lightbox = (($) => {
 			else {
 				this._$modalDialog.css('display', 'block')
 				this._$modal.addClass('in show')
-				$('.modal-backdrop').find('.ekko-lightbox-loader').remove()
+				$('.modal-backdrop').find('.bootstrap5-lightbox-loader').remove()
 			}
 			return this;
 		}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Bootstrap Lightbox</title>
+        <title>Bootstrap 5 Lightbox</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -153,16 +153,15 @@
                 <div class="col-md-10">
 
                     <h2>Install</h2>
-                    <p>Grab the latest CSS / JS files from the CDN: <a href="https://cdnjs.com/libraries/ekko-lightbox">https://cdnjs.com/libraries/ekko-lightbox</a>.
+                    <p>Grab the latest CSS / JS files from the CDN: <a href="https://cdnjs.com/libraries/bootstrap5-lightbox">https://cdnjs.com/libraries/bootstrap5-lightbox</a>.
                     </p>
-                    <p>Or, with bower: <code>bower install ekko-lightbox --save</code></p>
                     <p>Or, download the files directly: <a href="https://github.com/jcputney/lightbox/tree/master/dist">https://github.com/jcputney/lightbox/tree/master/dist</a>
                     </p>
                     <br/><br/>
                     <p>Place this near on your page, probably near the end of the body section:</p>
                     <code class="block-code">$(document).on('click', '[data-toggle="lightbox"]', function(event) {
                         event.preventDefault();
-                        $(this).ekkoLightbox();
+                        $(this).bootstrap5Lightbox();
                         });</code>
                     <br/><br/>
                     <p>Then simply add <code>data-toggle</code> to your anchor tags.</p>
@@ -176,7 +175,7 @@
 
                     <h2>Options</h2>
                     <p>Options are passed down to the modal object so you can also use any of the <a href="http://getbootstrap.com/javascript/#modals-usage">original modal options</a>.</p>
-                    <p>Pass the options to the calling function as an object, or set defaults using <code>$.fn.ekkoLightbox.defaults</code> (excluding modal default options, notable: title, footer, remote)</p>
+                    <p>Pass the options to the calling function as an object, or set defaults using <code>$.fn.bootstrap5Lightbox.defaults</code> (excluding modal default options, notable: title, footer, remote)</p>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -241,7 +240,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <code class="block-code">$(this).ekkoLightbox({
+                    <code class="block-code">$(this).bootstrap5Lightbox({
     alwaysShowClose: true,
     onShown: function() {
         console.log('Checking our the events huh?');
@@ -475,11 +474,11 @@
                     <code data-code="example-6"></code>
                     <code class="block-code">$(&#39;#open-image&#39;).click(function (e) {
     e.preventDefault();
-    $(this).ekkoLightbox();
+    $(this).bootstrap5Lightbox();
 });
 $(&#39;#open-youtube&#39;).click(function (e) {
     e.preventDefault();
-    $(this).ekkoLightbox();
+    $(this).bootstrap5Lightbox();
 });</code>
 
                     <h3 id="data-remote">Via <code>data-remote</code></h3>
@@ -567,7 +566,7 @@ $(&#39;#open-youtube&#39;).click(function (e) {
                             </div>
                         </div>
                     </div>
-                    <code class="html" data-code>$(this).ekkoLightbox({ wrapping: false });</code>
+                    <code class="html" data-code>$(this).bootstrap5Lightbox({ wrapping: false });</code>
 
                     <p class="footer"><span>Built by me, <a href="https://ashleyd.ws">jcputney</a></span></p>
                 </div>
@@ -592,7 +591,7 @@ $(&#39;#open-youtube&#39;).click(function (e) {
                 // delegate calls to data-toggle="lightbox"
                 $(document).on('click', '[data-toggle="lightbox"]:not([data-gallery="navigateTo"]):not([data-gallery="example-gallery-11"])', function (event) {
                     event.preventDefault();
-                    return $(this).ekkoLightbox({
+                    return $(this).bootstrap5Lightbox({
                         onShown: function () {
                             if (window.console) {
                                 return console.log('Checking our the events huh?');
@@ -609,7 +608,7 @@ $(&#39;#open-youtube&#39;).click(function (e) {
                 // disable wrapping
                 $(document).on('click', '[data-toggle="lightbox"][data-gallery="example-gallery-11"]', function(event) {
                     event.preventDefault();
-                    return $(this).ekkoLightbox({
+                    return $(this).bootstrap5Lightbox({
                         wrapping: false
                     });
                 });
@@ -617,18 +616,18 @@ $(&#39;#open-youtube&#39;).click(function (e) {
                 //Programmatically call
                 $('#open-image').click(function (e) {
                     e.preventDefault();
-                    $(this).ekkoLightbox();
+                    $(this).bootstrap5Lightbox();
                 });
                 $('#open-youtube').click(function (e) {
                     e.preventDefault();
-                    $(this).ekkoLightbox();
+                    $(this).bootstrap5Lightbox();
                 });
 
 				// navigateTo
                 $(document).on('click', '[data-toggle="lightbox"][data-gallery="navigateTo"]', function(event) {
                     event.preventDefault();
 
-                    return $(this).ekkoLightbox({
+                    return $(this).bootstrap5Lightbox({
                         onShown: function() {
 
 							this.modal().on('click', '.modal-footer a', function(e) {

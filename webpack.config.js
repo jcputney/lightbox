@@ -19,12 +19,12 @@ const prod = {
     mode: devMode ? 'development' : 'production',
     devtool: devMode ? 'cheap-module-source-map' : 'source-map',
     entry: [
-        './ekko-lightbox.js',
-        './ekko-lightbox.less'
+        './bootstrap5-lightbox.js',
+        './bootstrap5-lightbox.less'
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: devMode ? '[name].js' : 'ekko-lightbox.js'
+        filename: devMode ? '[name].js' : 'bootstrap5-lightbox.js'
     },
     module: {
         rules: [{
@@ -50,7 +50,7 @@ const prod = {
         },
         {
             test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
+            exclude: /(node_modules)/,
             use: {
                 loader: 'babel-loader',
                 options: {
@@ -61,7 +61,7 @@ const prod = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: devMode ? '[name].css' : 'ekko-lightbox.css'
+            filename: devMode ? '[name].css' : 'bootstrap5-lightbox.css'
         })
     ],
 };
@@ -70,12 +70,12 @@ if (!devMode) {
     prod.plugins.push(
         new webpack.BannerPlugin({
             banner:
-                'Lightbox for Bootstrap by @jcputney\n' +
+                'Lightbox for Bootstrap 5 by @jcputney\n' +
                 'https://github.com/jcputney/lightbox\n' +
                 '\n' +
                 'License: https://github.com/jcputney/lightbox/blob/master/LICENSE\n',
             entryOnly: true,
-            include: 'ekko-lightbox.js'
+            include: 'bootstrap5-lightbox.js'
         })
     );
 } else {

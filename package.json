@@ -1,7 +1,7 @@
 {
-  "name": "ekko-lightbox",
-  "description": "A lightbox gallery plugin for Bootstrap based on the modal plugin",
-  "version": "5.3.0",
+  "name": "bootstrap5-lightbox",
+  "description": "A lightbox gallery plugin for Bootstrap 5 based on the modal plugin",
+  "version": "1.0.0",
   "keywords": [
     "lightbox",
     "gallery",
@@ -11,9 +11,9 @@
   ],
   "homepage": "https://github.com/jcputney/lightbox",
   "author": "jcputney <jputney@noverant.com>",
-  "main": "dist/ekko-lightbox.min.js",
-  "style": "dist/ekko-lightbox.css",
-  "less": "ekko-lightbox.less",
+  "main": "dist/bootstrap5-lightbox.min.js",
+  "style": "dist/bootstrap5-lightbox.css",
+  "less": "bootstrap5-lightbox.less",
   "repository": {
     "type": "git",
     "url": "https://github.com/jcputney/lightbox.git"
@@ -45,7 +45,7 @@
     "webpack-cli": "^2.1.2",
     "webpack-serve": "^0.3.2"
   },
-  "npmName": "ekko-lightbox",
+  "npmName": "bootstrap5-lightbox",
   "npmFileMap": [
     {
       "basePath": "/dist/",
